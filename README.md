@@ -1,1 +1,1 @@
-Server for CVanish project
+Spring boot server for CVanish project
