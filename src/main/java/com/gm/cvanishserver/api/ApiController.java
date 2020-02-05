@@ -13,7 +13,7 @@ import java.util.Map;
 public class ApiController {
     private static Logger logger = LoggerFactory.getLogger(ApiController.class);
 
-    @GetMapping(value = "")
+    @GetMapping()
     public void ping() {
     }
 
