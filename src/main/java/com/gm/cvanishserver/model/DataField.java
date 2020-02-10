@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum DataField {
     FIRST_NAME ("firstName", "First name:"),
     LAST_NAME ("lastName", "Last name:"),
-    EXPERIENCE ("experience", "Experience:");
+    EXPERIENCE ("experiences", "Experience:");
 
     private final String key;
     private final String header;

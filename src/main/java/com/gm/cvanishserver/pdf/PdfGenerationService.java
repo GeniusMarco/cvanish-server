@@ -17,12 +17,12 @@ import java.util.Map;
 
 @Service
 public class PdfGenerationService {
-    private static final PdfFont HELVETICA;
-    private static final PdfFont HELVETICA_BOLD;
+    private static  PdfFont HELVETICA;
+    private static  PdfFont HELVETICA_BOLD;
     private static final int REGULAR_FONT_SIZE = 12;
     private static final int HEADER_FONT_SIZE = 16;
 
-    static {
+    private void setFonts(){
         try {
             HELVETICA = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             HELVETICA_BOLD = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
@@ -32,14 +32,13 @@ public class PdfGenerationService {
     }
 
     public byte[] generate(Map<String, Object> data) throws IOException {
+        setFonts();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter(byteArrayOutputStream));
         Document document = new Document(pdfDocument);
         addHeader(data.get(DataField.FIRST_NAME.getKey()) + " " + data.get(DataField.LAST_NAME.getKey()), document);
         addHeader(DataField.EXPERIENCE.getHeader(), document);
-        for (Map<String, String> experience : ((List<Map<String, String>>) data.get(DataField.EXPERIENCE.getKey()))) {
-            document.add(new Paragraph(experience.get("role") + ", " + experience.get("company") + ", " + experience.get("city") + ", " + experience.get("country") + ", " + experience.get("sinceDate") + ", " + experience.get("toDate")));
-        }
+        addExperiences((List<Map<String, String>>) data.get(DataField.EXPERIENCE.getKey()), document);
         for (String key : data.keySet()) {
             if (key.equals(DataField.EXPERIENCE.getKey()) || key.equals(DataField.FIRST_NAME.getKey()) || key.equals(DataField.LAST_NAME.getKey())) {
                 continue;
@@ -50,6 +49,12 @@ public class PdfGenerationService {
         document.close();
         byteArrayOutputStream.close();
         return byteArrayOutputStream.toByteArray();
+    }
+
+    private void addExperiences(List<Map<String, String>> experiences, Document document) {
+        for (Map<String, String> experience : experiences) {
+            document.add(new Paragraph(experience.get("role") + ", " + experience.get("company") + ", " + experience.get("city") + ", " + experience.get("country") + ", " + experience.get("sinceDate") + ", " + experience.get("toDate")));
+        }
     }
 
     private void addHeader(String header, Document document) {
