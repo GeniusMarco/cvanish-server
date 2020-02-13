@@ -1,12 +1,15 @@
 package com.gm.cvanishserver.pdf;
 
-import com.gm.cvanishserver.model.DataField;
+import com.gm.cvanishserver.dto.IncomingDTO;
 import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.action.PdfAction;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Link;
 import com.itextpdf.layout.element.Paragraph;
 import org.springframework.stereotype.Service;
 
@@ -31,21 +34,35 @@ public class PdfGenerationService {
         }
     }
 
-    public byte[] generate(Map<String, Object> data) throws IOException {
+    public byte[] generate(IncomingDTO incomingDTO) throws IOException {
         setFonts();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PdfDocument pdfDocument = new PdfDocument(new PdfWriter(byteArrayOutputStream));
         Document document = new Document(pdfDocument);
-        addHeader(data.get(DataField.FIRST_NAME.getKey()) + " " + data.get(DataField.LAST_NAME.getKey()), document);
-        addHeader(DataField.EXPERIENCE.getHeader(), document);
-        addExperiences((List<Map<String, String>>) data.get(DataField.EXPERIENCE.getKey()), document);
-        for (String key : data.keySet()) {
-            if (key.equals(DataField.EXPERIENCE.getKey()) || key.equals(DataField.FIRST_NAME.getKey()) || key.equals(DataField.LAST_NAME.getKey())) {
-                continue;
-            }
-            document.add(new Paragraph(key));
-            document.add(new Paragraph(data.get(key).toString()));
-        }
+
+        addHeader(incomingDTO.getFirstName() + " " + incomingDTO.getLastName(), document);
+
+        addHeader("Phone number:", document);
+        document.add(new Paragraph(incomingDTO.getPhone()));
+
+        addHeader("Email address:", document);
+        document.add(new Paragraph(incomingDTO.getEmail()));
+
+        addHeader("Summary:", document);
+        document.add(new Paragraph(incomingDTO.getSummary()));
+
+        addHeader("Experience:", document);
+        addExperiences(incomingDTO.getExperiences(), document);
+
+        addHeader("Education:", document);
+        addEducations(incomingDTO.getEducations(), document);
+
+        addHeader("Skills:", document);
+        document.add(new Paragraph(incomingDTO.getSkills()));
+
+        addHeader("Links:", document);
+        addLinks(incomingDTO.getLinks(), document);
+
         document.close();
         byteArrayOutputStream.close();
         return byteArrayOutputStream.toByteArray();
@@ -54,6 +71,18 @@ public class PdfGenerationService {
     private void addExperiences(List<Map<String, String>> experiences, Document document) {
         for (Map<String, String> experience : experiences) {
             document.add(new Paragraph(experience.get("role") + ", " + experience.get("company") + ", " + experience.get("city") + ", " + experience.get("country") + ", " + experience.get("sinceDate") + ", " + experience.get("toDate")));
+        }
+    }
+
+    private void addEducations(List<Map<String, String>> educations, Document document) {
+        for (Map<String, String> education : educations) {
+            document.add(new Paragraph(education.get("fieldOfStudy") + ", " + education.get("level") + ", " + education.get("university") + ", " + education.get("city") + ", " + education.get("country") + ", " + education.get("sinceDate") + ", " + education.get("toDate")));
+        }
+    }
+
+    private void addLinks(List<String> links, Document document) {
+        for (String link : links) {
+            document.add(new Paragraph(new Link(link, PdfAction.createURI(link))).setFontColor(ColorConstants.BLUE));
         }
     }
 
