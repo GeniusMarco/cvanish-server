@@ -28,8 +28,8 @@ public class ApiController {
     @PostMapping(value = "/data", consumes = "application/json", produces = "application/pdf")
     public byte[] receiveData(@RequestBody IncomingDTO incomingDto) throws IOException {
         logger.info("Received: " + incomingDto);
-        byte[] result = pdfGenerationService.generate(incomingDto);
-        logger.info("Producing data of size: " + result.length);
+        byte[] result = pdfGenerationService.transformToPdf(incomingDto);
+        logger.info("Produced PDF of size: " + result.length);
         return result;
     }
 }
