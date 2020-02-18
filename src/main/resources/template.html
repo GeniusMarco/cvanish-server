@@ -24,12 +24,13 @@
         ul { margin: 0 0 32px 17px; }
         #objective { width: 500px; float: left; }
         #objective p { font-family: Georgia, Serif; font-style: italic; color: #666; text-align: justify }
-        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 150px; float: left; height: 100px;/* border-right: 1px solid #999; */ }
-        dd { width: 500px; float: right; }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 100px; float: left; /*height: 100px;*//* border-right: 1px solid #999; */ }
+        dd { width: 550px; float: left; }
         dd.clear { float: none; margin: 0; height: 15px; }
         .email { color: blue }
         #footer p { font-size: 10px; float:left; font-family: Georgia, Serif; font-style: italic; color: #666; text-align: justify }
-        .experience { margin-bottom: 30px }
+        .experience, .education, .project { margin-bottom: 10px }
+        .bold { font-weight: bold }
     </style>
 </head>
 
@@ -44,8 +45,8 @@
         <h1 class="fn">$firstName $lastName</h1>
 
         <p>
-            Phone number: <span class="tel">$phone</span><br />
-            Email address: <a class="email" href="mailto:$email">$email</a>
+            <span class="bold">Phone number:</span> <span class="tel">$phone</span><br />
+            <span class="bold">Email address:</span> <a class="email" href="mailto:$email">$email</a>
         </p>
     </div>
 
@@ -60,29 +61,30 @@
     <dl>
         <dd class="clear"></dd>
 
-        <dt>Education</dt>
+        <dt>Experience</dt>
         <dd>
-            <h2>Withering Madness University - Planet Vhoorl</h2>
-            <p><strong>Major:</strong> Public Relations<br />
-                <strong>Minor:</strong> Scale Tending</p>
+            $experiences
         </dd>
 
-        <dd class="clear"></dd>
+        <dd class="clear" style="height: 5px"></dd>
+
+        <dt>Projects</dt>
+        <dd>
+            $projects
+        </dd>
+
+        <dd class="clear" style="height: 5px"></dd>
+
+        <dt>Education</dt>
+        <dd>
+            $educations
+        </dd>
+
+        <dd class="clear" style="height: 5px"></dd>
 
         <dt>Skills</dt>
         <dd>
             <div>$skills</div>
-        </dd>
-
-        <dd class="clear"></dd>
-
-        <dt>Experience</dt>
-        <dd>
-            <!--<div class="experience">
-                <h2>Doomsday Cult</h2>
-                <span class="subtitle">Leader/Overlord - Baton Rogue, LA - 1926-2010</span>
-            </div>-->
-            $experiences
         </dd>
 
         <dd class="clear"></dd>
