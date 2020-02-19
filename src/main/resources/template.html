@@ -10,27 +10,40 @@
     <title>$firstName $lastName - CV</title>
 
     <style type="text/css">
+        @font-face {
+            font-family: Lato;
+            src: url(src/main/resources/fonts/Lato-Regular.ttf);
+        }
+        @font-face {
+            font-family: Lato;
+            src: url(src/main/resources/fonts/Lato-Bold.ttf);
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: Lato;
+            src: url(src/main/resources/fonts/Lato-Italic.ttf);
+            font-style: italic;
+        }
         * { margin: 0; padding: 0; }
-        body { font: 16px Helvetica, Sans-Serif; line-height: 24px; background: url(images/noise.jpg); }
+        body { font: 16px Lato, Sans-Serif; line-height: 24px; }
         .clear { clear: both; }
-        #page-wrap { width: 700px; margin: 40px auto 60px; }
-        #pic { float: right; margin: -30px 0 0 0; }
+        #page-wrap { width: 700px; margin: 40px auto 10px; }
         h1 { margin: 0 16px 16px 0; padding: 0 16px 16px 0; font-size: 42px; font-weight: bold; letter-spacing: -2px; border-bottom: 1px solid #999; }
         h2 { font-size: 20px; margin: 0 0 6px 0; position: relative; }
-        .subtitle {font-style: italic; font-family: Georgia, Serif; font-size: 16px; font-weight: normal; }
+        .subtitle {font-size: 16px; font-weight: normal; }
         p { margin: 0 0 16px 0; }
         a { color: #999; text-decoration: none; border-bottom: 1px dotted #999; }
         a:hover { border-bottom-style: solid; color: black; }
         ul { margin: 0 0 32px 17px; }
         #objective { width: 500px; float: left; }
-        #objective p { font-family: Georgia, Serif; font-style: italic; color: #666; text-align: justify }
-        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 100px; float: left; /*height: 100px;*//* border-right: 1px solid #999; */ }
-        dd { width: 550px; float: left; }
+        #objective p { font-style: italic; color: #666; text-align: justify }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 10px 0; width: 100px; float: left; /*height: 100px;*//* border-right: 1px solid #999; */ }
+        dd { width: 550px; float: none; margin-left: 130px; }
         dd.clear { float: none; margin: 0; height: 15px; }
-        .email { color: blue }
-        #footer p { font-size: 10px; float:left; font-family: Georgia, Serif; font-style: italic; color: #666; text-align: justify }
-        .experience, .education, .project { margin-bottom: 10px }
-        .bold { font-weight: bold }
+        .link { color: blue }
+        #footer p { font-size: 10px; float:left; font-style: italic; color: #666; text-align: justify }
+        .experience, .education, .project, .links{ margin-bottom: 10px;  }
+        .bold { font-weight: bold; }
     </style>
 </head>
 
@@ -46,7 +59,7 @@
 
         <p>
             <span class="bold">Phone number:</span> <span class="tel">$phone</span><br />
-            <span class="bold">Email address:</span> <a class="email" href="mailto:$email">$email</a>
+            <span class="bold">Email address:</span> <a class="link" href="mailto:$email">$email</a>
         </p>
     </div>
 
@@ -84,18 +97,15 @@
 
         <dt>Skills</dt>
         <dd>
-            <div>$skills</div>
+            $skills
         </dd>
 
         <dd class="clear"></dd>
 
-        <div><dt>Hobbies</dt>
-            <dd>World Domination, Deep Sea Diving, Murder Most Foul</dd></div>
-
-        <dd class="clear"></dd>
-
-        <dt>References</dt>
-        <dd>Available on request</dd>
+        <dt>Links</dt>
+        <dd>
+            $links
+        </dd>
 
         <dd class="clear"></dd>
     </dl>
