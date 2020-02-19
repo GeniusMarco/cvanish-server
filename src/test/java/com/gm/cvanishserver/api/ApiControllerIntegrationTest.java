@@ -13,7 +13,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
@@ -29,13 +28,7 @@ class ApiControllerIntegrationTest {
     }
 
     @Test
-    void dummy() throws Exception {
-        mockMvc.perform(get(ENDPOINT))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
-    @Test
-    void receiving() throws Exception {
+    void receiving_json_should_return_200() throws Exception {
         Map<String,Object> map = new HashMap<>();
         map.put("firstName", "John");
         map.put("lastName", "Doe");

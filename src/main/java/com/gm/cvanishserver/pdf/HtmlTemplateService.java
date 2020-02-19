@@ -13,12 +13,12 @@ public class HtmlTemplateService {
         StringBuilder sb = new StringBuilder();
         for (Map<String, String> experience : experiences) {
             sb.append(String.format(
-                    "<div class=\"experience\"><h2>%s</h2><span class=\"subtitle\">%s, %s, %s, %s</span></div>",
+                    "<div class=\"experience\"><h2>%s %s</h2><span class=\"subtitle\">%s, %s, %s</span></div>",
                     experience.get("role"),
+                    createDateString(experience.get("sinceDate"), experience.get("toDate")),
                     experience.get("company"),
                     experience.get("city"),
-                    experience.get("country"),
-                    createDateString(experience.get("sinceDate"), experience.get("toDate"))));
+                    experience.get("country")));
         }
         return sb.toString();
     }
@@ -35,11 +35,11 @@ public class HtmlTemplateService {
         StringBuilder sb = new StringBuilder();
         for (Map<String, Object> project : projects) {
             sb.append(String.format(
-                    "<div class=\"project\"><h2>%s %s</h2>%s<span>%s</span></div>",
+                    "<div class=\"project\"><h2>%s %s</h2>%s<div class=\"justified\">%s</div></div>",
                     project.get("title"),
                     createDateString((String) project.get("sinceYear"), (String) project.get("toYear")),
                     buildProjectLinksString((List<Map<String, String>>) project.get("links")),
-                    ((String) project.get("description")).replaceAll("\n", "<br />")));
+                    replaceNewLinesWithHtmlBreaks((String) project.get("description"))));
         }
         return sb.toString();
     }
@@ -48,13 +48,13 @@ public class HtmlTemplateService {
         StringBuilder sb = new StringBuilder();
         for (Map<String, String> education : educations) {
             sb.append(String.format(
-                    "<div class=\"education\"><h2>%s, %s</h2><span class=\"subtitle\">%s, %s, %s, %s</span></div>",
+                    "<div class=\"education\"><h2>%s, %s %s</h2><span class=\"subtitle\">%s, %s, %s</span></div>",
                     education.get("fieldOfStudy"),
                     education.get("level"),
+                    createDateString(education.get("sinceDate"), education.get("toDate")),
                     education.get("university"),
                     education.get("city"),
-                    education.get("country"),
-                    createDateString(education.get("sinceDate"), education.get("toDate"))));
+                    education.get("country")));
         }
         return sb.toString();
     }
