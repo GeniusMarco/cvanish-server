@@ -28,15 +28,19 @@ class ApiControllerIntegrationTest {
     }
 
     @Test
-    void receiving_json_should_return_200() throws Exception {
+    void consuming_correct_json_should_return_200_and_produce_pdf() throws Exception {
         Map<String,Object> map = new HashMap<>();
         map.put("firstName", "John");
         map.put("lastName", "Doe");
+        map.put("phone", "123456789");
+        map.put("email", "email@address.com");
+        map.put("summary", "");
+        map.put("skills", "");
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(map);
 
-        mockMvc.perform(post(ENDPOINT + "/data").contentType("application/json")
-                .content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(post(ENDPOINT + "/data").content(json).contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/pdf"));
     }
 }

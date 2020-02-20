@@ -11,16 +11,16 @@
     <style type="text/css">
         @font-face {
             font-family: Lato;
-            src: url(src/main/resources/fonts/Lato-Regular.ttf);
+            src: url(classpath:fonts/Lato-Regular.ttf);
         }
         @font-face {
             font-family: Lato;
-            src: url(src/main/resources/fonts/Lato-Bold.ttf);
+            src: url(classpath:fonts/Lato-Bold.ttf);
             font-weight: bold;
         }
         @font-face {
             font-family: Lato;
-            src: url(src/main/resources/fonts/Lato-Italic.ttf);
+            src: url(classpath:fonts/Lato-Italic.ttf);
             font-style: italic;
         }
         * { margin: 0; padding: 0; }
@@ -34,8 +34,8 @@
         a { color: #999; text-decoration: none; border-bottom: 1px dotted #999; }
         a:hover { border-bottom-style: solid; color: black; }
         ul { margin: 0 0 32px 17px; }
-        #objective { width: 500px; float: left; }
-        #objective p { font-style: italic; color: #666; text-align: justify }
+        #summary { width: 500px; float: left; }
+        #summary p { font-style: italic; color: #666; text-align: justify }
         dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 36px 0; width: 100px; float: left; }
         dd { width: 550px; float: none; margin-left: 130px; }
         dd.clear { float: none; margin: 0; height: 15px; }
@@ -63,49 +63,28 @@
         </p>
     </div>
 
-    <div id="objective">
-        <p>
-            $summary
-        </p>
-    </div>
-
-    <div class="clear"></div>
+    $summary
 
     <dl>
         <dd class="clear"></dd>
 
-        <dt>Experience</dt>
-        <dd>
-            $experiences
-        </dd>
+        $experiences
 
         <dd class="clear" style="height: 5px"></dd>
 
-        <dt>Projects</dt>
-        <dd>
-            $projects
-        </dd>
+        $projects
 
         <dd class="clear" style="height: 5px"></dd>
 
-        <dt>Education</dt>
-        <dd>
-            $educations
-        </dd>
+        $educations
 
         <dd class="clear" style="height: 5px"></dd>
 
-        <dt>Skills</dt>
-        <dd>
-            $skills
-        </dd>
+        $skills
 
         <dd class="clear"></dd>
 
-        <dt>Links</dt>
-        <dd>
-            $links
-        </dd>
+        $links
 
         <dd class="clear"></dd>
     </dl>

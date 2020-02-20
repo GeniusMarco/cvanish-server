@@ -1,22 +1,24 @@
 package com.gm.cvanishserver.dto;
 
+import com.gm.cvanishserver.model.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
+@Builder
 @ToString(exclude = {"summary", "skills"})
 public class IncomingDTO {
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
-    private String summary;
-    private List<Map<String, String>> experiences;
-    private List<Map<String, Object>> projects;
-    private List<Map<String, String>> educations;
-    private String skills;
-    private List<String> links;
+    private Summary summary;
+    private List<Experience> experiences;
+    private List<Project> projects;
+    private List<Education> educations;
+    private Skills skills;
+    private List<Link> links;
 }
