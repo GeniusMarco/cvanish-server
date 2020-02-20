@@ -12,6 +12,6 @@ public class Link implements DataField {
 
     @Override
     public String getHtml() {
-        return String.format("<div class=\"links\"><span class=\"link\">%s</span></div>", this.getUrl());
+        return String.format("<div class=\"links\"><span class=\"link\"><a href=\"%s\">%s</a></span></div>", this.getUrl(), this.getUrl());
     }
 }

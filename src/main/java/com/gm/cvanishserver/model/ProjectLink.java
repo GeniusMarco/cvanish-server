@@ -12,7 +12,7 @@ public class ProjectLink extends Link implements DataField {
 
     @Override
     public String getHtml() {
-        return StringUtils.isEmpty(this.getName()) ? String.format("<div><span class=\"link\">%s</span></div>",this.getUrl()) :
-                String.format("<div><span class=\"subtitle\">%s:</span> <span class=\"link\">%s</span></div>", this.getName(), getUrl());
+        return StringUtils.isEmpty(this.getName()) ? String.format("<div><span class=\"link\"><a href=\"%s\">%s</a></span></div>",this.getUrl(), this.getUrl()) :
+                String.format("<div><span class=\"subtitle\">%s:</span> <span class=\"link\"><a href=\"%s\">%s</a></span></div>", this.getName(), this.getUrl(), this.getUrl());
     }
 }
