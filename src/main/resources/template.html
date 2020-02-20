@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>$firstName $lastName - CV</title>
+
+    <style type="text/css">
+        @font-face {
+            font-family: Lato;
+            src: url(classpath:fonts/Lato-Regular.ttf);
+        }
+        @font-face {
+            font-family: Lato;
+            src: url(classpath:fonts/Lato-Bold.ttf);
+            font-weight: bold;
+        }
+        @font-face {
+            font-family: Lato;
+            src: url(classpath:fonts/Lato-Italic.ttf);
+            font-style: italic;
+        }
+        * { margin: 0; padding: 0; }
+        body { font: 16px Lato, Sans-Serif; line-height: 24px; }
+        .clear { clear: both; }
+        #page-wrap { width: 700px; margin: 40px auto 10px; }
+        h1 { margin: 0 16px 16px 0; padding: 0 16px 16px 0; font-size: 42px; font-weight: bold; letter-spacing: -2px; border-bottom: 1px solid #999; }
+        h2 { font-size: 20px; margin: 0 0 6px 0; position: relative; }
+        .subtitle {font-size: 16px; font-weight: normal; }
+        p { margin: 0 0 16px 0; }
+        a { color: #999; text-decoration: none; border-bottom: 1px dotted #999; }
+        a:hover { border-bottom-style: solid; color: black; }
+        ul { margin: 0 0 32px 17px; }
+        #summary { width: 500px; float: left; }
+        #summary p { font-style: italic; color: #666; text-align: justify }
+        dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 36px 0; width: 100px; float: left; }
+        dd { width: 550px; float: none; margin-left: 130px; }
+        dd.clear { float: none; margin: 0; height: 15px; }
+        .link { color: blue }
+        #footer p { font-size: 10px; float:left; font-style: italic; color: #666; text-align: justify }
+        .experience, .education, .project, .links{ margin-bottom: 10px; page-break-inside: avoid }
+        .bold { font-weight: bold; }
+        .justified { text-align: justify }
+    </style>
+</head>
+
+<body>
+
+<div id="page-wrap">
+
+    <div id="contact-info" class="vcard">
+
+        <!-- Microformats! -->
+
+        <h1 class="fn">$firstName $lastName</h1>
+
+        <p>
+            <span class="bold">Phone number:</span> <span class="tel">$phone</span><br/>
+            <span class="bold">Email address:</span> <a class="link" href="mailto:$email">$email</a>
+        </p>
+    </div>
+
+    $summary
+
+    <dl>
+        <dd class="clear"></dd>
+
+        $experiences
+
+        <dd class="clear" style="height: 5px"></dd>
+
+        $projects
+
+        <dd class="clear" style="height: 5px"></dd>
+
+        $educations
+
+        <dd class="clear" style="height: 5px"></dd>
+
+        $skills
+
+        <dd class="clear"></dd>
+
+        $links
+
+        <dd class="clear"></dd>
+    </dl>
+
+    <div class="clear"></div>
+
+    <div id="footer">
+        <p>Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji procesu
+            rekrutacji (zgodnie z ustawą z dnia 10 maja 2018 roku o ochronie danych osobowych (Dz. Ustaw z 2018, poz.
+            1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016
+            r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego
+            przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).</p>
+    </div>
+</div>
+</body>
+</html>
