@@ -28,7 +28,7 @@ class ApiControllerIntegrationTest {
     }
 
     @Test
-    void consuming_correct_json_should_return_200_and_produce_pdf() throws Exception {
+    void consuming_json_should_return_200_and_produce_pdf() throws Exception {
         Map<String,Object> map = new HashMap<>();
         map.put("firstName", "John");
         map.put("lastName", "Doe");

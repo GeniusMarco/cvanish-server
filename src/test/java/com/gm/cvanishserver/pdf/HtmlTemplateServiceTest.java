@@ -18,7 +18,7 @@ class HtmlTemplateServiceTest {
     HtmlTemplateService htmlTemplateService;
 
     @Test
-    void getting_basic_data_should_return_correctly_filled_template() throws IOException {
+    void getting_basic_data_should_return_template_with_relevant_fields_filled() throws IOException {
         IncomingDTO incomingDTO = IncomingDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -42,7 +42,7 @@ class HtmlTemplateServiceTest {
     }
 
     @Test
-    void getting_complex_data_should_return_correctly_filled_template() throws IOException {
+    void getting_complex_data_should_return_template_with_all_fields_filled() throws IOException {
         IncomingDTO incomingDTO = IncomingDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
