@@ -33,6 +33,7 @@ class HtmlTemplateServiceTest {
         assertTrue(filledTemplate.contains(incomingDTO.getPhone()));
         assertTrue(filledTemplate.contains("Email address:"));
         assertTrue(filledTemplate.contains(incomingDTO.getEmail()));
+
         assertFalse(filledTemplate.contains("Experience"));
         assertFalse(filledTemplate.contains("Projects"));
         assertFalse(filledTemplate.contains("Education"));
