@@ -1,6 +1,6 @@
 package com.gm.cvanishserver.api;
 
-import com.gm.cvanishserver.dto.IncomingDTO;
+import com.gm.cvanishserver.dto.FormDTO;
 import com.gm.cvanishserver.pdf.PdfGenerationService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-    private static Logger logger = LoggerFactory.getLogger(ApiController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 
     private final PdfGenerationService pdfGenerationService;
 
@@ -25,9 +25,9 @@ public class ApiController {
     }
 
     @PostMapping(value = "/data", consumes = "application/json", produces = "application/pdf")
-    public byte[] receiveData(@RequestBody IncomingDTO incomingDto) throws IOException {
-        logger.info("Received: " + incomingDto);
-        byte[] result = pdfGenerationService.transformToPdf(incomingDto);
+    public byte[] receiveData(@RequestBody FormDTO formDTO) throws IOException {
+        logger.info("Received: " + formDTO);
+        byte[] result = pdfGenerationService.transformToPdf(formDTO);
         logger.info("Produced PDF of size: " + result.length);
         return result;
     }

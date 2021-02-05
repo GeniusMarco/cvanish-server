@@ -1,6 +1,6 @@
 package com.gm.cvanishserver.pdf;
 
-import com.gm.cvanishserver.dto.IncomingDTO;
+import com.gm.cvanishserver.dto.FormDTO;
 import com.itextpdf.html2pdf.HtmlConverter;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,9 @@ public class PdfGenerationService {
         this.htmlTemplateService = htmlTemplateService;
     }
 
-    public byte[] transformToPdf(IncomingDTO incomingDTO) throws IOException {
+    public byte[] transformToPdf(FormDTO formDTO) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        HtmlConverter.convertToPdf(htmlTemplateService.fillTemplate(incomingDTO), byteArrayOutputStream);
+        HtmlConverter.convertToPdf(htmlTemplateService.fillTemplate(formDTO), byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 

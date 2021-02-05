@@ -1,22 +1,20 @@
 package com.gm.cvanishserver.model;
 
 import com.gm.cvanishserver.utils.DateUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-public class Project implements DataField {
-    private String title;
-    private String sinceYear;
-    private String toYear;
-    private List<ProjectLink> links;
-    private String description;
+@Value
+public class Project implements Renderable {
+    String title;
+    String sinceYear;
+    String toYear;
+    List<ProjectLink> links;
+    String description;
 
     @Override
-    public String getHtml() {
+    public String toHtml() {
         return String.format("<div class=\"project\"><h2>%s %s</h2>%s<div class=\"justified\">%s</div></div>",
                 this.getTitle(),
                 DateUtils.createDateString(this.getSinceYear(), this.getToYear()),
@@ -27,7 +25,7 @@ public class Project implements DataField {
     private String buildProjectLinksString(List<ProjectLink> links) {
         StringBuilder sb = new StringBuilder();
         for (ProjectLink link : links) {
-            sb.append(link.getHtml());
+            sb.append(link.toHtml());
         }
         return String.format("<div style=\"margin-bottom: 10px\">%s</div>", sb.toString());
     }

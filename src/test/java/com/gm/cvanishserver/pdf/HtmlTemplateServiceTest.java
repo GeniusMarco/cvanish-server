@@ -1,6 +1,6 @@
 package com.gm.cvanishserver.pdf;
 
-import com.gm.cvanishserver.dto.IncomingDTO;
+import com.gm.cvanishserver.dto.FormDTO;
 import com.gm.cvanishserver.model.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ class HtmlTemplateServiceTest {
 
     @Test
     void getting_basic_data_should_return_template_with_relevant_fields_filled() throws IOException {
-        IncomingDTO incomingDTO = IncomingDTO.builder()
+        FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
                 .phone("123456789")
@@ -27,12 +27,12 @@ class HtmlTemplateServiceTest {
                 .summary(new Summary(""))
                 .skills(new Skills(""))
                 .build();
-        String filledTemplate = htmlTemplateService.fillTemplate(incomingDTO);
-        assertTrue(filledTemplate.contains(incomingDTO.getFirstName() + " " + incomingDTO.getLastName()));
+        String filledTemplate = htmlTemplateService.fillTemplate(formDTO);
+        assertTrue(filledTemplate.contains(formDTO.getFirstName() + " " + formDTO.getLastName()));
         assertTrue(filledTemplate.contains("Phone number:"));
-        assertTrue(filledTemplate.contains(incomingDTO.getPhone()));
+        assertTrue(filledTemplate.contains(formDTO.getPhone()));
         assertTrue(filledTemplate.contains("Email address:"));
-        assertTrue(filledTemplate.contains(incomingDTO.getEmail()));
+        assertTrue(filledTemplate.contains(formDTO.getEmail()));
 
         assertFalse(filledTemplate.contains("Experience"));
         assertFalse(filledTemplate.contains("Projects"));
@@ -43,24 +43,24 @@ class HtmlTemplateServiceTest {
 
     @Test
     void getting_complex_data_should_return_template_with_all_fields_filled() throws IOException {
-        IncomingDTO incomingDTO = IncomingDTO.builder()
+        FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
                 .phone("123456789")
                 .email("email@address.com")
                 .summary(new Summary("Summary text"))
                 .experiences(List.of(new Experience("Developer", "Company", "New York", "USA", "2020", "")))
-                .projects(List.of(new Project("Project title", "2019", "2020", List.of(new ProjectLink("0", "Link name")), "Project description")))
+                .projects(List.of(new Project("Project title", "2019", "2020", List.of(new ProjectLink("google.com", "0", "Link name")), "Project description")))
                 .educations(List.of(new Education("Computer Science", "BSc", "01-2000", "12-2002", "MIT", "Cambridge", "USA")))
                 .skills(new Skills("Java, Spring Boot"))
                 .links(List.of(new Link("www.google.com")))
                 .build();
-        String filledTemplate = htmlTemplateService.fillTemplate(incomingDTO);
-        assertTrue(filledTemplate.contains(incomingDTO.getFirstName() + " " + incomingDTO.getLastName()));
+        String filledTemplate = htmlTemplateService.fillTemplate(formDTO);
+        assertTrue(filledTemplate.contains(formDTO.getFirstName() + " " + formDTO.getLastName()));
         assertTrue(filledTemplate.contains("Phone number:"));
-        assertTrue(filledTemplate.contains(incomingDTO.getPhone()));
+        assertTrue(filledTemplate.contains(formDTO.getPhone()));
         assertTrue(filledTemplate.contains("Email address:"));
-        assertTrue(filledTemplate.contains(incomingDTO.getEmail()));
+        assertTrue(filledTemplate.contains(formDTO.getEmail()));
         assertTrue(filledTemplate.contains("Experience"));
         assertTrue(filledTemplate.contains("Developer"));
         assertTrue(filledTemplate.contains("Company"));

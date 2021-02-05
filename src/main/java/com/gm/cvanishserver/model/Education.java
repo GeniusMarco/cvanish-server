@@ -1,22 +1,20 @@
 package com.gm.cvanishserver.model;
 
 import com.gm.cvanishserver.utils.DateUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
-public class Education implements DataField {
-    private String fieldOfStudy;
-    private String level;
-    private String sinceDate;
-    private String toDate;
-    private String university;
-    private String city;
-    private String country;
+@Value
+public class Education implements Renderable {
+    String fieldOfStudy;
+    String level;
+    String sinceDate;
+    String toDate;
+    String university;
+    String city;
+    String country;
 
     @Override
-    public String getHtml() {
+    public String toHtml() {
         return String.format("<div class=\"education\"><h2>%s, %s %s</h2><span class=\"subtitle\">%s, %s, %s</span></div>",
                 this.getFieldOfStudy(),
                 this.getLevel(),

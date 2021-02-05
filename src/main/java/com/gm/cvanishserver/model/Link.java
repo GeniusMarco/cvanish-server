@@ -1,17 +1,13 @@
 package com.gm.cvanishserver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Link implements DataField {
-    private String url;
+@Value
+public class Link implements Renderable {
+    String url;
 
     @Override
-    public String getHtml() {
+    public String toHtml() {
         return String.format("<div class=\"links\"><span class=\"link\"><a href=\"%s\">%s</a></span></div>", this.getUrl(), this.getUrl());
     }
 }

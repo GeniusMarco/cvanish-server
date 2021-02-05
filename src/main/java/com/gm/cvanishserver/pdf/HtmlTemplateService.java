@@ -1,7 +1,7 @@
 package com.gm.cvanishserver.pdf;
 
-import com.gm.cvanishserver.dto.IncomingDTO;
-import com.gm.cvanishserver.model.DataField;
+import com.gm.cvanishserver.dto.FormDTO;
+import com.gm.cvanishserver.model.Renderable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
@@ -13,28 +13,28 @@ import java.util.List;
 @Service
 public class HtmlTemplateService {
 
-    String fillTemplate(IncomingDTO incomingDTO) throws IOException {
+    String fillTemplate(FormDTO formDTO) throws IOException {
         String templateString = Files.readString(ResourceUtils.getFile("classpath:template.html").toPath());
-        templateString = templateString.replace("$firstName", incomingDTO.getFirstName());
-        templateString = templateString.replace("$lastName", incomingDTO.getLastName());
-        templateString = templateString.replace("$phone", incomingDTO.getPhone());
-        templateString = templateString.replace("$email", incomingDTO.getEmail());
-        templateString = templateString.replace("$summary", replaceNewLinesWithHtmlBreaks(incomingDTO.getSummary().getHtml()));
-        templateString = templateString.replace("$experiences", aggregateHtmls(incomingDTO.getExperiences(), "Experience"));
-        templateString = templateString.replace("$projects", aggregateHtmls(incomingDTO.getProjects(), "Projects"));
-        templateString = templateString.replace("$educations", aggregateHtmls(incomingDTO.getEducations(), "Education"));
-        templateString = templateString.replace("$skills", replaceNewLinesWithHtmlBreaks(incomingDTO.getSkills().getHtml()));
-        templateString = templateString.replace("$links", aggregateHtmls(incomingDTO.getLinks(), "Links"));
+        templateString = templateString.replace("$firstName", formDTO.getFirstName());
+        templateString = templateString.replace("$lastName", formDTO.getLastName());
+        templateString = templateString.replace("$phone", formDTO.getPhone());
+        templateString = templateString.replace("$email", formDTO.getEmail());
+        templateString = templateString.replace("$summary", replaceNewLinesWithHtmlBreaks(formDTO.getSummary().toHtml()));
+        templateString = templateString.replace("$experiences", aggregateHtmls(formDTO.getExperiences(), "Experience"));
+        templateString = templateString.replace("$projects", aggregateHtmls(formDTO.getProjects(), "Projects"));
+        templateString = templateString.replace("$educations", aggregateHtmls(formDTO.getEducations(), "Education"));
+        templateString = templateString.replace("$skills", replaceNewLinesWithHtmlBreaks(formDTO.getSkills().toHtml()));
+        templateString = templateString.replace("$links", aggregateHtmls(formDTO.getLinks(), "Links"));
         return templateString;
     }
 
 
-    String aggregateHtmls(List<? extends DataField> list, String header) {
+    String aggregateHtmls(List<? extends Renderable> list, String header) {
         if (CollectionUtils.isEmpty(list)) {
             return "";
         }
         StringBuilder sb = new StringBuilder(String.format("<dt>%s</dt><dd>", header));
-        list.forEach(df -> sb.append(df.getHtml()));
+        list.forEach(df -> sb.append(df.toHtml()));
         return sb.append("</dd>").toString();
     }
 

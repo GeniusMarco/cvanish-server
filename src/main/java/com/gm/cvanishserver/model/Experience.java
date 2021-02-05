@@ -1,21 +1,19 @@
 package com.gm.cvanishserver.model;
 
 import com.gm.cvanishserver.utils.DateUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
 
-@Data
-@AllArgsConstructor
-public class Experience implements DataField {
-    private String role;
-    private String company;
-    private String city;
-    private String country;
-    private String sinceDate;
-    private String toDate;
+@Value
+public class Experience implements Renderable {
+    String role;
+    String company;
+    String city;
+    String country;
+    String sinceDate;
+    String toDate;
 
     @Override
-    public String getHtml() {
+    public String toHtml() {
         return String.format("<div class=\"experience\"><h2>%s %s</h2><span class=\"subtitle\">%s, %s, %s</span></div>",
                 this.getRole(),
                 DateUtils.createDateString(this.getSinceDate(), this.getToDate()),

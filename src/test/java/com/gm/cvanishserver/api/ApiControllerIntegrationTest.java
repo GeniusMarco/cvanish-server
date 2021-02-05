@@ -39,7 +39,7 @@ class ApiControllerIntegrationTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(map);
 
-        mockMvc.perform(post(ENDPOINT + "/data").content(json).contentType("application/json"))
+        mockMvc.perform(post(ENDPOINT + "/generate").content(json).contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/pdf"));
     }
