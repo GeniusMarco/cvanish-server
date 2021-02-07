@@ -14,7 +14,7 @@ import static java.util.Collections.emptyList;
 
 @Value
 @Builder
-@ToString(of = {"firstName", "lastName", "phoneNumber", "email"})
+@ToString(of = {"firstName", "lastName", "phone", "email"})
 public class FormDTO {
     @NotEmpty
     String firstName;
@@ -22,7 +22,7 @@ public class FormDTO {
     String lastName;
     @NotEmpty
     @PhoneNumber
-    String phoneNumber;
+    String phone;
     @NotEmpty
     @Email
     String email;

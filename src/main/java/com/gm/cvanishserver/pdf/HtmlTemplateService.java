@@ -16,7 +16,7 @@ public class HtmlTemplateService {
         StringBuilder builder = new StringBuilder(Files.readString(ResourceUtils.getFile("classpath:template.html").toPath()));
         replaceAll(builder, "$firstName", formDTO.getFirstName());
         replaceAll(builder, "$lastName", formDTO.getLastName());
-        replaceAll(builder, "$phone", formDTO.getPhoneNumber());
+        replaceAll(builder, "$phone", formDTO.getPhone());
         replaceAll(builder, "$email", formDTO.getEmail());
         replaceAll(builder, "$summary", formDTO.getSummary().toHtml());
         replaceAll(builder, "$experiences", listToHtmlWithHeader(formDTO.getExperiences(), "Experience"));
