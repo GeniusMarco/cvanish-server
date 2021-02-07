@@ -21,5 +21,4 @@ public class PdfGenerationService {
         HtmlConverter.convertToPdf(htmlTemplateService.fillTemplate(formDTO), byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
 }

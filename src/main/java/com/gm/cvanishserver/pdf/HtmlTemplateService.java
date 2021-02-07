@@ -12,34 +12,35 @@ import java.util.List;
 
 @Service
 public class HtmlTemplateService {
-
     String fillTemplate(FormDTO formDTO) throws IOException {
-        String templateString = Files.readString(ResourceUtils.getFile("classpath:template.html").toPath());
-        templateString = templateString.replace("$firstName", formDTO.getFirstName());
-        templateString = templateString.replace("$lastName", formDTO.getLastName());
-        templateString = templateString.replace("$phone", formDTO.getPhone());
-        templateString = templateString.replace("$email", formDTO.getEmail());
-        templateString = templateString.replace("$summary", replaceNewLinesWithHtmlBreaks(formDTO.getSummary().toHtml()));
-        templateString = templateString.replace("$experiences", aggregateHtmls(formDTO.getExperiences(), "Experience"));
-        templateString = templateString.replace("$projects", aggregateHtmls(formDTO.getProjects(), "Projects"));
-        templateString = templateString.replace("$educations", aggregateHtmls(formDTO.getEducations(), "Education"));
-        templateString = templateString.replace("$skills", replaceNewLinesWithHtmlBreaks(formDTO.getSkills().toHtml()));
-        templateString = templateString.replace("$links", aggregateHtmls(formDTO.getLinks(), "Links"));
-        return templateString;
+        StringBuilder builder = new StringBuilder(Files.readString(ResourceUtils.getFile("classpath:template.html").toPath()));
+        replaceAll(builder, "$firstName", formDTO.getFirstName());
+        replaceAll(builder, "$lastName", formDTO.getLastName());
+        replaceAll(builder, "$phone", formDTO.getPhoneNumber());
+        replaceAll(builder, "$email", formDTO.getEmail());
+        replaceAll(builder, "$summary", formDTO.getSummary().toHtml());
+        replaceAll(builder, "$experiences", listToHtmlWithHeader(formDTO.getExperiences(), "Experience"));
+        replaceAll(builder, "$projects", listToHtmlWithHeader(formDTO.getProjects(), "Projects"));
+        replaceAll(builder, "$educations", listToHtmlWithHeader(formDTO.getEducations(), "Education"));
+        replaceAll(builder, "$skills", formDTO.getSkills().toHtml());
+        replaceAll(builder, "$links", listToHtmlWithHeader(formDTO.getLinks(), "Links"));
+        return builder.toString();
     }
 
+    void replaceAll(StringBuilder builder, String placeholder, String replacement) {
+        int index = builder.indexOf(placeholder);
+        while (index != -1) {
+            builder.replace(index, index + placeholder.length(), replacement);
+            index = builder.indexOf(placeholder, index + replacement.length());
+        }
+    }
 
-    String aggregateHtmls(List<? extends Renderable> list, String header) {
-        if (CollectionUtils.isEmpty(list)) {
+    private <T extends Renderable> String listToHtmlWithHeader(List<T> renderables, String header) {
+        if (CollectionUtils.isEmpty(renderables)) {
             return "";
         }
         StringBuilder sb = new StringBuilder(String.format("<dt>%s</dt><dd>", header));
-        list.forEach(df -> sb.append(df.toHtml()));
+        renderables.forEach(r -> sb.append(r.toHtml()));
         return sb.append("</dd>").toString();
     }
-
-    String replaceNewLinesWithHtmlBreaks(String text) {
-        return text.replaceAll("\n", "<br />");
-    }
-
 }

@@ -1,15 +1,19 @@
 package com.gm.cvanishserver.utils;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.util.StringUtils;
 
-public final class DateUtils {
-    public static String createDateString(String since, String to) {
+@UtilityClass
+public class DateUtils {
+    private static final String NONBREAKING_SPACE = "&nbsp;";
+
+    public String createDateString(String since, String to) {
         if (StringUtils.isEmpty(to)) {
-            return ("(" + since + "&nbsp;—&nbsp;Present)");
+            return ("(" + since + NONBREAKING_SPACE + "—" +  NONBREAKING_SPACE + "Present)");
         }
         if (to.equals(since)) {
             return ("(" + since + ")");
         }
-        return ("(" + since + "&nbsp;—&nbsp;" + to + ")");
+        return ("(" + since + NONBREAKING_SPACE + "—" + NONBREAKING_SPACE + to + ")");
     }
 }
