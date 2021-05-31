@@ -3,10 +3,8 @@ package com.gm.cvanishserver.model;
 import lombok.Value;
 import org.springframework.util.StringUtils;
 
-import static com.gm.cvanishserver.utils.HtmlUtils.replaceNewLinesWithHtmlBreaks;
-
 @Value
-public class Summary implements Renderable {
+public class Summary implements Renderable, Multiline {
     String text;
 
     @Override

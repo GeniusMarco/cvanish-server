@@ -19,7 +19,7 @@ class FillTemplateTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .phoneNumber("123456789")
+                .phone("123456789")
                 .email("email@address.com")
                 .build();
         String filledTemplate = htmlTemplateService.fillTemplate(formDTO);
@@ -31,7 +31,7 @@ class FillTemplateTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .phoneNumber("123456789")
+                .phone("123456789")
                 .email("email@address.com")
                 .summary(new Summary("Summary text"))
                 .experiences(List.of(new Experience("Developer", "Company", "New York", "USA", "2020", "")))

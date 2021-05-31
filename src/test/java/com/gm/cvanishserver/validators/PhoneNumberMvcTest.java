@@ -26,7 +26,7 @@ public class PhoneNumberMvcTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .phoneNumber("123456789")
+                .phone("123456789")
                 .email("email@address.com")
                 .build();
         String json = objectMapper.writeValueAsString(formDTO);
@@ -43,7 +43,7 @@ public class PhoneNumberMvcTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .phoneNumber("1111111111111111")
+                .phone("1111111111111111")
                 .email("email@address.com")
                 .build();
         String json = objectMapper.writeValueAsString(formDTO);

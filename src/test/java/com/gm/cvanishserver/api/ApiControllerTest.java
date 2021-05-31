@@ -26,7 +26,7 @@ class ApiControllerTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .phoneNumber("123456789")
+                .phone("123456789")
                 .email("email@address.com")
                 .build();
         String json = objectMapper.writeValueAsString(formDTO);
@@ -43,7 +43,7 @@ class ApiControllerTest {
         FormDTO formDTO = FormDTO.builder()
                 .firstName("")
                 .lastName("")
-                .phoneNumber("")
+                .phone("")
                 .email("")
                 .build();
         String json = objectMapper.writeValueAsString(formDTO);

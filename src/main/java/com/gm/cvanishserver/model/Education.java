@@ -1,10 +1,9 @@
 package com.gm.cvanishserver.model;
 
-import com.gm.cvanishserver.utils.DateUtils;
 import lombok.Value;
 
 @Value
-public class Education implements Renderable {
+public class Education implements Renderable, TimeBound {
     String fieldOfStudy;
     String level;
     String sinceDate;
@@ -18,7 +17,7 @@ public class Education implements Renderable {
         return String.format("<div class=\"education\"><h2>%s, %s %s</h2><span class=\"subtitle\">%s, %s, %s</span></div>",
                 this.getFieldOfStudy(),
                 this.getLevel(),
-                DateUtils.createDateString(this.getSinceDate(), this.getToDate()),
+                createDateString(this.getSinceDate(), this.getToDate()),
                 this.getUniversity(),
                 this.getCity(),
                 this.getCountry());
